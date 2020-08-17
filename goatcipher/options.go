@@ -2,9 +2,9 @@ package goatcipher
 
 //CipherOptions hold Cipher sub command options
 type CipherOptions struct {
-	cipherMode int
-	listCipher bool
-	encrypt    bool
+	Mode      int
+	ListModes bool
+	Encrypt   bool
 }
 
 // NewCipherOptions create an empty set of cipher options
