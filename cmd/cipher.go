@@ -12,11 +12,13 @@ var cipherCmd = &cobra.Command{
 }
 
 func runCipher(cmd *cobra.Command, args []string) {
-
+	CipherOptions
 }
+
+/*
 func parseCipherFlags() (*CipherOptions, error) {
 
-}
+}*/
 
 func init() {
 	rootCmd.AddCommand(cipherCmd)

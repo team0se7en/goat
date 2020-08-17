@@ -1,4 +1,4 @@
-package cipher
+package goatcipher
 
 //CipherOptions hold Cipher sub command options
 type CipherOptions struct {
