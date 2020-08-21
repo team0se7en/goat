@@ -5,6 +5,7 @@ type CipherOptions struct {
 	Mode      int
 	ListModes bool
 	Encrypt   bool
+	Input     string
 }
 
 // NewCipherOptions create an empty set of cipher options

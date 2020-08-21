@@ -13,9 +13,12 @@ var cipherCmd *cobra.Command
 func runCipher(cmd *cobra.Command, args []string) error {
 	options, err := parseCipherFlags()
 	if err != nil {
-		return fmt.Errorf("Error While parsing Arguments: ", err)
+		return fmt.Errorf("Error While parsing Arguments: %v", err)
 	}
-	goatCipher.Execute(options)
+	err = goatCipher.Execute(options)
+	if err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -40,6 +43,11 @@ func parseCipherFlags() (*goatCipher.CipherOptions, error) {
 		return nil, fmt.Errorf("Invalid Value for encrypt: %v", err)
 	}
 	options.Encrypt = encrypt
+	input, err := cipherCmd.Flags().GetString("input")
+	if err != nil {
+		return nil, fmt.Errorf("Invalid Value for encrypt: %v", err)
+	}
+	options.Input = input
 	return options, nil
 }
 
@@ -53,4 +61,5 @@ func init() {
 	cipherCmd.Flags().IntP("mode", "m", 0, "Set the cipher mode")
 	cipherCmd.Flags().BoolP("listModes", "l", false, "List All Available Cipher Modes")
 	cipherCmd.Flags().BoolP("encrypt", "e", false, "Decrypt/Encrypt the input  default is decrypt")
+	cipherCmd.Flags().StringP("input", "i", "", "Input to encrypt/decrypt")
 }
