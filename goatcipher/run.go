@@ -1,6 +1,10 @@
 package goatcipher
 
-import "fmt"
+import (
+	"fmt"
+
+	"github.com/team0se7en/goat/utils"
+)
 
 var modes = [2]int{
 	0, // BASE64 MODE
@@ -22,6 +26,19 @@ func Execute(options *CipherOptions) error {
 		}
 		return nil
 	}
-
+	if !utils.Contains(modes, options.Mode) {
+		return fmt.Errorf("You have an invalid mode %d plase check the mode List -l ", options.Mode)
+	}
+	if options.Input == "" {
+		return fmt.Errorf("Please Provide input to be encrypted/decrypted")
+	}
+	var err error
+	switch options.Mode {
+	case 0:
+		err = Base64(options.Input, options.Encrypt)
+	}
+	if err != nil {
+		return err
+	}
 	return nil
 }
